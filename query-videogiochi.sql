@@ -279,26 +279,27 @@
 
 --10- Selezionare i dati della prima software house che ha rilasciato un gioco, assieme ai dati del gioco stesso (software house id : 5)
 
-SELECT TOP 1 software_houses.*, videogames.[name]
-FROM videogames
+--SELECT TOP 1 software_houses.*, videogames.[name]
+--FROM videogames
 
-INNER JOIN software_houses
-on software_houses.id = videogames.software_house_id
+--INNER JOIN software_houses
+--on software_houses.id = videogames.software_house_id
 
-ORDER BY videogames.release_date
+--ORDER BY videogames.release_date 
+
 
 --11- Selezionare i dati del videogame (id, name, release_date, totale recensioni) con più recensioni (videogame id : 398)
 
+SELECT TOP 1 videogames.id, videogames.[name], videogames.release_date, count(reviews.id) as Qty_reviews
+FROM videogames
 
---SELECT videogames.id, videogames.[name], videogames.release_date, count(reviews.id) as Qty_reviews
---FROM videogames
+INNER JOIN reviews
+on reviews.videogame_id = videogames.id
 
---INNER JOIN reviews
---on reviews.videogame_id = videogames.id
 
---WHERE videogames.id = 398
+GROUP BY videogames.id, videogames.[name], videogames.release_date
 
---GROUP BY videogames.id, videogames.[name], videogames.release_date
+ORDER BY Qty_reviews DESC
 
 
 
