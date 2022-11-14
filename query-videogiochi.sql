@@ -290,21 +290,43 @@
 
 --11- Selezionare i dati del videogame (id, name, release_date, totale recensioni) con più recensioni (videogame id : 398)
 
-SELECT TOP 1 videogames.id, videogames.[name], videogames.release_date, count(reviews.id) as Qty_reviews
-FROM videogames
+--SELECT TOP 1 videogames.id, videogames.[name], videogames.release_date, count(reviews.id) as Qty_reviews
+--FROM videogames
 
-INNER JOIN reviews
-on reviews.videogame_id = videogames.id
+--INNER JOIN reviews
+--on reviews.videogame_id = videogames.id
 
 
-GROUP BY videogames.id, videogames.[name], videogames.release_date
+--GROUP BY videogames.id, videogames.[name], videogames.release_date
 
-ORDER BY Qty_reviews DESC
+--ORDER BY Qty_reviews DESC
 
 
 
 --12- Selezionare la software house che ha vinto più premi tra il 2015 e il 2016 (software house id : 1)
 
+
+SELECT TOP 1 software_houses.id, software_houses.[name], count(*) as Qty_awards 
+
+FROM software_houses
+
+--videogames
+INNER JOIN videogames
+on software_houses.id = videogames.software_house_id
+
+--award_videogame
+INNER JOIN award_videogame
+on videogames.id = award_videogame.videogame_id
+
+--awards
+INNER JOIN awards
+on award_videogame.award_id = awards.id
+
+WHERE award_videogame.[year] <= 2015 AND award_videogame.[year] <= 2016
+
+GROUP BY software_houses.id, software_houses.[name]
+
+ORDER BY Qty_awards DESC
 
 
 
