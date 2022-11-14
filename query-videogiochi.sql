@@ -306,28 +306,47 @@
 --12- Selezionare la software house che ha vinto più premi tra il 2015 e il 2016 (software house id : 1)
 
 
-SELECT TOP 1 software_houses.id, software_houses.[name], count(*) as Qty_awards 
+--SELECT TOP 1 software_houses.id, software_houses.[name], count(*) as Qty_awards 
 
-FROM software_houses
+--FROM software_houses
 
---videogames
-INNER JOIN videogames
-on software_houses.id = videogames.software_house_id
+----videogames
+--INNER JOIN videogames
+--on software_houses.id = videogames.software_house_id
 
---award_videogame
-INNER JOIN award_videogame
-on videogames.id = award_videogame.videogame_id
+----award_videogame
+--INNER JOIN award_videogame
+--on videogames.id = award_videogame.videogame_id
 
---awards
-INNER JOIN awards
-on award_videogame.award_id = awards.id
+----awards
+--INNER JOIN awards
+--on award_videogame.award_id = awards.id
 
-WHERE award_videogame.[year] <= 2015 AND award_videogame.[year] <= 2016
+--WHERE award_videogame.[year] <= 2015 AND award_videogame.[year] <= 2016
 
-GROUP BY software_houses.id, software_houses.[name]
+--GROUP BY software_houses.id, software_houses.[name]
 
-ORDER BY Qty_awards DESC
+--ORDER BY Qty_awards DESC
 
 
 
 --13- Selezionare le categorie dei videogame i quali hanno una media recensioni inferiore a 1.5 (10)
+
+SELECT categories.[name], avg(reviews.rating) as avg_reviews
+FROM categories
+
+--category_videogame
+INNER JOIN category_videogame
+on category_videogame.category_id = categories.id
+
+--videogames
+INNER JOIN videogames
+on videogames.id = category_videogame.videogame_id
+
+--reviews
+INNER JOIN reviews
+on reviews.videogame_id = videogames.id
+
+GROUP BY categories.[name]
+
+ORDER BY avg_reviews
