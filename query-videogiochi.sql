@@ -123,11 +123,42 @@
 
 --1- Selezionare i dati di tutti giocatori che hanno scritto almeno una recensione, mostrandoli una sola volta (996)
 
+--SELECT players.id, players.[name]
+--FROM players
+--INNER JOIN reviews
+--on players.id = reviews.player_id
+--GROUP BY players.id, players.[name]
+
+
 --2- Sezionare tutti i videogame dei tornei tenuti nel 2016, mostrandoli una sola volta (226)
+
+--SELECT tournament_videogame.videogame_id, videogames.[name]
+--FROM videogames
+--INNER JOIN tournament_videogame
+--on tournament_videogame.videogame_id = videogames.id
+--INNER JOIN tournaments
+--on tournaments.id = tournament_videogame.tournament_id
+--WHERE tournaments.[year] LIKE '2016'
+--GROUP BY tournament_videogame.videogame_id, videogames.[name]
+
 
 --3- Mostrare le categorie di ogni videogioco (1718)
 
+--SELECT categories.[name] as category_name, videogames.id as id_videogame
+--FROM categories
+--INNER JOIN category_videogame
+--on category_videogame.category_id = categories.id
+--INNER JOIN videogames
+--on videogames.id = category_videogame.videogame_id
+
 --4- Selezionare i dati di tutte le software house che hanno rilasciato almeno un gioco dopo il 2020, mostrandoli una sola volta (6)
+
+--SELECT DISTINCT software_houses.id as sh_name
+--FROM software_houses
+--INNER JOIN videogames
+--on videogames.software_house_id = software_houses.id
+--WHERE DATEPART(year, release_date) = 2020
+
 
 --5- Selezionare i premi ricevuti da ogni software house per i videogiochi che ha prodotto (55)
 
