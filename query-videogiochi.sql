@@ -242,6 +242,36 @@
 
 --9- Selezionare i giocatori che hanno giocato al gioco più atteso del 2018 in un torneo del 2019 (3306)
 
+--SELECT players.*, tournaments.[name]
+--FROM tournaments
+
+----players_videogame
+--INNER JOIN player_tournament
+--on player_tournament.tournament_id = tournaments.id
+
+----players
+--INNER JOIN players
+--on players.id = player_tournament.player_id
+
+----tournament_videogame
+--INNER JOIN tournament_videogame
+--on tournament_videogame.tournament_id = tournaments.id
+
+----videogames
+--INNER JOIN videogames
+--on videogames.id = tournament_videogame.videogame_id
+
+----award_videogame
+--INNER JOIN award_videogame
+--on award_videogame.videogame_id = videogames.id
+
+----awards
+--INNER JOIN awards
+--on award_videogame.award_id = awards.id
+
+--WHERE awards.id = 5 
+--AND award_videogame.[year] = '2018'
+--AND tournaments.[year] = '2019'
 
 
 
